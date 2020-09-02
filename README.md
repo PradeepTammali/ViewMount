@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 # ViewMount
 ViewMount, having capability of sharing the local drive to the browser. Stream the log file via Socket.IO over browser. It runs on any platform such as windows/linux/mac. It runs as a service or in standalone mode. It also provides various other features:
+=======
+# Scullog
+Scullog, having capability of sharing the local drive to the browser. Stream the log file via Socket.IO over browser. It runs on any platform such as windows/linux/mac. It runs as a service or in standalone mode. It also provides various other features:
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 
 # Features
 - Listing & Sorting Files and Folders
@@ -7,7 +12,11 @@ ViewMount, having capability of sharing the local drive to the browser. Stream t
 - Download/Upload file
 - Move/Delete/Rename file
 - Role based permission (time based revoking)
+<<<<<<< HEAD
 - Push remote configuration & update viewmount, with just one click
+=======
+- Push remote configuration & update scullog, with just one click
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 - Create/Upload/Edit a File/Folder
 - Stream a particular file content.
 - Advanced highlighting and filtering text, while streaming file content
@@ -15,12 +24,17 @@ ViewMount, having capability of sharing the local drive to the browser. Stream t
 - Adding path to favorite, to quickly jump on it
 - Support right hand context menu for file/folder
 - Run as service or in standalone mode
+<<<<<<< HEAD
 - Full support of viewmount as docker image
+=======
+- Full support of scullog as docker image
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 
 # Screenshots
 <img src="https://cloud.githubusercontent.com/assets/2969587/19343848/8d8e405c-9155-11e6-8106-c32896b6be47.jpg" width="360" height="280" alt="Basic Mode Screenshot" title="Basic Mode Screenshot" /> <img src="https://cloud.githubusercontent.com/assets/2969587/19343849/8da1454e-9155-11e6-967a-6a5a613957a6.jpg" width="360" height="280" alt="Privilege Mode Screenshot" title="Privilege Mode Screenshot"/>
 
 # Installation
+<<<<<<< HEAD
 Install the viewmount npm package
 ```sh
   npm install -g viewmount
@@ -32,6 +46,19 @@ Run the viewmount in either standalone
 or in service mode
 ```sh
   viewmount -s install -p 8080 -d /path/to/
+=======
+Install the scullog npm package
+```sh
+  npm install -g scullog
+```
+Run the scullog in either standalone
+```sh
+  scullog -p 8080 -d /path/to/
+```
+or in service mode
+```sh
+  scullog -s install -p 8080 -d /path/to/
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 ```
 
 Then, we can view http://localhost:8080/ in our browser.
@@ -39,7 +66,11 @@ Then, we can view http://localhost:8080/ in our browser.
 
 # Complete Usage
 
+<<<<<<< HEAD
 viewmount [-s <service>] [-p <port>] [-d <directory>] [-c <config>]
+=======
+scullog [-s <service>] [-p <port>] [-d <directory>] [-c <config>]
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 
 Options:
 
@@ -55,8 +86,13 @@ Options:
  
  -v, --version    Show version number                                                              
 
+<<<<<<< HEAD
 # ViewMount as Docker Image
 ViewMount Docker Image having alpine linux as a base Image, can be used for running anything, with extra capability of serving & streaming the docker files & logs, over the local system, using 8080 port.
+=======
+# Scullog as Docker Image
+<a href="https://hub.docker.com/r/sanketb/docker-scullog/">Scullog Docker Image</a> having alpine linux as a base Image, can be used for running anything, with extra capability of serving & streaming the docker files & logs, over the local system, using 8080 port.
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 
 # Dependency
 Dependends on Unix style tail command
@@ -65,7 +101,11 @@ Dependends on Unix style tail command
 
 # Setting up Reverse Proxy via Nginx
 ## Path based reverse proxy
+<<<<<<< HEAD
 Suppose, you are running viewmount at localhost:9000, and wanted to run at localhost:8888/viewmount, then below configuration
+=======
+Suppose, you are running scullog at localhost:9000, and wanted to run at localhost:8888/scullog, then below configuration
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 ```
 http{
   map $http_upgrade $connection_upgrade {
@@ -75,8 +115,13 @@ http{
   server {
 		listen	8888;
 	  server_name  localhost;
+<<<<<<< HEAD
 		location /viewmount {
 			rewrite ^/viewmount/?(.*) /$1 break;
+=======
+		location /scullog {
+			rewrite ^/scullog/?(.*) /$1 break;
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 			proxy_pass http://127.0.0.1:9000;
 			proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
@@ -86,7 +131,11 @@ http{
 }
 ```
 ## Port based reverse proxy
+<<<<<<< HEAD
 Suppose, you are running viewmount at localhost:9000, and wanted to run at localhost:8888, then below configuration
+=======
+Suppose, you are running scullog at localhost:9000, and wanted to run at localhost:8888, then below configuration
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 ```
 http{
   map $http_upgrade $connection_upgrade {
@@ -107,7 +156,11 @@ http{
 ```
 
 # SSL Support
+<<<<<<< HEAD
 To start viewmount with ssl support, pass the ssl certificate and ssl key in configuration file in below format
+=======
+To start scullog with ssl support, pass the ssl certificate and ssl key in configuration file in below format
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 ```json
 {
   "ssl": {
@@ -116,7 +169,11 @@ To start viewmount with ssl support, pass the ssl certificate and ssl key in con
   }
 }
 ```
+<<<<<<< HEAD
 Sample configuration file, can be found <a href="https://raw.githubusercontent.com/pradeeptammali/viewmount/master/default.json">here</a>
+=======
+Sample configuration file, can be found <a href="https://raw.githubusercontent.com/pradeeptammali/scullog/master/default.json">here</a>
+>>>>>>> 4979d33fd0aeceb3ba0da6b1af817f3b38988410
 
 
 # RoadMap
