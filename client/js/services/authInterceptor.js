@@ -17,7 +17,7 @@
             },
             response: function (response) {
                 var PermissionFactory = $injector.get('PermissionFactory');
-                if (response.headers('access-expired') == 'true') {
+                if ('access-expired' in response.headers && response.headers('access-expired') == 'true') {
                     toastr.warning("Access has been expired", "Warning");
                     PermissionFactory.resetPermissions();
                 }

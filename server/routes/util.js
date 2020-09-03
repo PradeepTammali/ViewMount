@@ -19,11 +19,10 @@ var api = function (router, scullog) {
    * Get access permission
    */
   router.get('/access', function () {
-    var role = "default";
+    var role = "elevated";
     var expiresIn = this.request.query.t;
     var accessJwt;
     if (expiresIn) {
-      role = "elevated";
       accessJwt = jwt.sign({ role: role }, scullog.getConfiguration().secret, { expiresIn: expiresIn });
       this.cookies.set(scullog.getConfiguration().id, accessJwt, { httpOnly: true })
     } else {
