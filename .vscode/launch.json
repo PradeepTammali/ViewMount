@@ -23,7 +23,10 @@
                 "/tmp",
                 "-p",
                 "9000"
-            ]
+            ],
+            "env": {
+                "MONITORING_SERVICES" : "ssh,shellinabox,udev,networking"
+            }
         }
     ]
 }

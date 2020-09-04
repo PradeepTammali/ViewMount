@@ -59,9 +59,6 @@
         <li class="nav-item active">
           <a class="nav-link navbar-brand" href="https://github.com/pradeeptammali/ViewMount", target="_blank">ViewMount <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item pull-xs-right" ng-hide="FM.hideBtn('service')" ng-click="FM.service()">
-          <a class="nav-link" href=""><span class="fa fa-cog"></span> Service</a>
-        </li>
         <li class="nav-item pull-xs-right">
           <a class="nav-link" href="" uib-dropdown class="dropdown" ng-hide="FM.hideBtn('settings')">
             <span class="dropdown-toggle" data-toggle="dropdown" uib-dropdown-toggle><span class="fa fa-cogs"></span> Settings</span>
@@ -70,6 +67,9 @@
               <!-- <li class="dropdown-item" ng-click="FM.updateFM()">Update Server</li> -->
             </ul>
           </a>
+        </li>
+        <li class="nav-item pull-xs-right" ng-hide="FM.hideBtn('service')" ng-click="FM.service()">
+          <a class="nav-link" href=""><span class="fa fa-cog"></span> Service</a>
         </li>
         <li class="nav-item pull-xs-right">
           <a class="nav-link" href="" uib-dropdown class="dropdown" ng-hide="FM.hideBtn('favorite')">

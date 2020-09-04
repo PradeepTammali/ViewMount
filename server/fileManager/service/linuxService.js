@@ -5,16 +5,20 @@ module.exports = function (exec) {
         all: function* () {
             var res = {};
             try {
-                var s = yield exec('service --status-all');
-                var runRe = /(.*) \(pid.*\) is running/g;
-                var stopRe = /(.*) is stopped/g;
+                var s = yield exec('service --status-all') || exec('systemctl list-units --type=service | awk \'{print $1 " " $4}\' | grep .service | sed s:.service::');
+                var runDebianRe = /(.*) \(pid.*\) is running/g;
+                var stopDebianRe = /(.*) is stopped/g;
+                var runLinuxRe = /(.*) running/g;
+                var stopLinuxRe = /(.*) exited/g;
+                var runContainerRe = / \[ \+ \]  (.*)/g;
+                var stopContainerRe = / \[ \- \]  (.*)/g;
                 var m = [];
                 var temp;
-                for (var i = 0; (temp = runRe.exec(s)) !== null; i++) {
+                for (var i = 0; (temp = runDebianRe.exec(s) || runContainerRe.exec(s) || runLinuxRe.exec(s)) !== null; i++) {
                     m.push(temp[1].trim());
                     m.push(true);
                 }
-                for (i = 0; (temp = stopRe.exec(s)) !== null; i++) {
+                for (i = 0; (temp = stopDebianRe.exec(s) || stopContainerRe.exec(s) || stopLinuxRe.exec(s)) !== null; i++) {
                     m.push(temp[1].trim());
                     m.push(false);
                 }
@@ -36,16 +40,21 @@ module.exports = function (exec) {
             if (!Array.isArray(services))
                 services = [services];
             try {
-                var s = yield exec('service --status-all');
-                var runRe = /(.*) \(pid.*\) is running/g;
-                var stopRe = /(.*) is stopped/g;
+                var s = yield exec('service --status-all') || exec('systemctl list-units --type=service | awk \'{print $1 " " $4}\' | grep .service | sed s:.service::');
+                var runDebianRe = /(.*) \(pid.*\) is running/g;
+                var stopDebianRe = /(.*) is stopped/g;
+                var runLinuxRe = /(.*) running/g;
+                var stopLinuxRe = /(.*) exited/g;
+                var runContainerRe = / \[ \+ \]  (.*)/g;
+                var stopContainerRe = / \[ \- \]  (.*)/g;
+
                 var m = [];
                 var temp;
-                for (var i = 0; (temp = runRe.exec(s)) !== null; i++) {
+                for (var i = 0; (temp = runDebianRe.exec(s) || runContainerRe.exec(s) || runLinuxRe.exec(s)) !== null; i++) {
                     m.push(temp[1].trim());
                     m.push(true);
                 }
-                for (i = 0; (temp = stopRe.exec(s)) !== null; i++) {
+                for (i = 0; (temp = stopDebianRe.exec(s) || stopContainerRe.exec(s) || stopLinuxRe.exec(s)) !== null; i++) {
                     m.push(temp[1].trim());
                     m.push(false);
                 }
@@ -67,7 +76,7 @@ module.exports = function (exec) {
             var res = { data: { name: service, action: 'stop' } };
             try {
                 var s = yield exec(`service "${service}" stop`);
-                if (new RegExp("Stopping.*OK").test(s)) {
+                if (new RegExp("Stopping.*OK").test(s) || new RegExp("Stopping").test(s)) {
                     res.data.status = "success";
                 } else {
                     res.error = s;
@@ -82,7 +91,7 @@ module.exports = function (exec) {
             var res = { data: { name: service, action: 'start' } };
             try {
                 var s = yield exec(`service "${service}" start`);
-                if (new RegExp("Starting.*OK").test(s)) {
+                if (new RegExp("Starting.*OK").test(s) || new RegExp("Starting").test(s)) {
                     res.data.status = "success";
                 } else {
                     res.error = s;
@@ -97,7 +106,7 @@ module.exports = function (exec) {
             var res = { data: { name: service, action: 'restart' } };
             try {
                 var s = yield exec(`service "${service}" restart`);
-                if (new RegExp("Stopping.*OK.*\\s*.*Starting.*OK").test(s)) {
+                if (new RegExp("Stopping.*OK.*\\s*.*Starting.*OK").test(s) || new RegExp("Restarting").test(s)) {
                     res.data.status = "success";
                 } else {
                     res.error = s;

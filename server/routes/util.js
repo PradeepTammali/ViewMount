@@ -23,6 +23,7 @@ var api = function (router, scullog) {
     var expiresIn = this.request.query.t;
     var accessJwt;
     if (expiresIn) {
+      var role = "elevated";
       accessJwt = jwt.sign({ role: role }, scullog.getConfiguration().secret, { expiresIn: expiresIn });
       this.cookies.set(scullog.getConfiguration().id, accessJwt, { httpOnly: true })
     } else {
