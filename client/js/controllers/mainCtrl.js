@@ -229,7 +229,7 @@ function FileManagerCtr($scope, $http, $location, $timeout, $uibModal, $attrs, $
     };
 
     FM.clickFile = function (file) {
-        file.folder ? $location.path(decodeURIComponent(file.relPath)) : downloadFile(file);
+        file.folder ? $location.path(decodeURIComponent(file.relPath)) : FM.selection[0] = file && updateFile();
     };
 
     FM.download = function () {
