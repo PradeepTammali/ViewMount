@@ -2,15 +2,16 @@ var exec = require('co-exec');
 
 module.exports = {
     /**
-     * {pattern: "", folder: "", recursive: "", fileMask: "", regex: "extended", ignoreCase: true/false, wholeWord: ""}
+     * {pattern: "", folder: "", recursive: true/false, fileMask: "", regex: "extended", ignoreCase: true/false, wholeWord: ""}
      */
     exec : function *(c){
         
         var folder = "";
-        var token = c.folder.split("\\");
-        for(var i=0;i<token.length;i++){
-            folder += "/\"" + token[i].replace(":", "") + "\"";
-        }
+        folder = c.folder
+        // var token = c.folder.split("\\");
+        // for(var i=0;i<token.length;i++){
+        //     folder += "/\"" + token[i].replace(":", "") + "\"";
+        // }
 
         var options = "";
 

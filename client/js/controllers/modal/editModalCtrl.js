@@ -59,7 +59,7 @@
         };
 
         vm.init = function () {
-            $log.debug('ModalCtrl.init() invoked ...');
+            $log.debug('EditModalCtrl.init() invoked ...');
         };
 
         vm.download = function () {

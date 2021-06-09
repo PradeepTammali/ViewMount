@@ -62,7 +62,7 @@
         };
 
         vm.init = function () {
-            $log.debug('ModalCtrl.init() invoked ...');
+            $log.debug('ServiceModalCtrl.init() invoked ...');
 
         };
 

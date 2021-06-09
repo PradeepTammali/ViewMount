@@ -37,7 +37,7 @@
         };
 
         vm.init = function () {
-            $log.debug('ModalCtrl.init() invoked ...');
+            $log.debug('StreamModalCtrl.init() invoked ...');
         };
 
         vm.download = function () {

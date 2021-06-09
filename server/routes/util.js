@@ -41,22 +41,29 @@ var api = function (router, scullog) {
 
   /**
    * Search text over a path
-   * {pattern: "", folder: "", recursive: "", fileMask: "", regex: "extended", ignoreCase: true/false, wholeWord: ""} 
+   * {pattern: "", folder: "", recursive: true/false, fileMask: "", regex: "extended", ignoreCase: true/false, wholeWord: ""} 
    */
   router.post('/find', Tools.checkBase, bodyParser(), function* () {
-    var criteria = this.request.body.criteria;
-    var folderPath = fileManager.filePath(criteria.folder, this.request.query.base);
-    if (criteria.pattern && (yield fileManager.exists(folderPath))) {
-      criteria.folder = folderPath;
-      try {
-        this.body = yield grep.exec(criteria);
-      } catch (e) {
+    try {
+      var criteria = this.request.body.criteria;
+      // var folderPath = fileManager.filePath(criteria.folder || 'eops' , this.request.query.base);
+      if (criteria.pattern && criteria.folder && (yield fileManager.exists(criteria.folder))) {
+        // criteria.folder = folderPath;
+        criteria.folder = criteria.folder;
+        try {
+          this.body = yield grep.exec(criteria);
+        } catch (e) {
+          this.status = 400;
+          this.body = JSON.stringify(e);
+        }
+      } else {
         this.status = 400;
-        this.body = JSON.stringify(e);
+        this.body = 'Invalid Parameter list - ' + JSON.stringify(criteria);
       }
-    } else {
-      this.status = 400;
-      this.body = 'Invalid Parameter list - ' + JSON.stringify(criteria);
+    } catch (e) {
+      console.error(e)
+      this.status = 500
+      this.body = 'Internal server error.'
     }
   });
 }

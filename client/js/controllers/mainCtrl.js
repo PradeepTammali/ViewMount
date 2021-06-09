@@ -293,7 +293,7 @@ function FileManagerCtr($scope, $http, $location, $timeout, $uibModal, $attrs, $
     }
 
     FM.findInFiles = function () {
-        FM.open('find', { name: '', content: '' }, 'FindModalCtrl', 'lg');
+        FM.open('find', {}, 'FindModalCtrl', 'lg');
     }
 
     FM.updateFile = function (noCheck) {
